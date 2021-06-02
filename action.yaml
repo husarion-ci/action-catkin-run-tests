@@ -1,0 +1,22 @@
+name: Get version bump
+description: Determine which version (major.minor.patch) to bump based on the PR body or provided input
+
+inputs:
+  docker-image:
+    description: Image with build ros workspace
+    required: true
+  workspace-path:
+    description: Path to ros workspace (inside docker)
+    required: true
+  setup-bash-path:
+    description: Path to workspace setup.bash file (by default it will source install space)
+
+runs:
+  using: composite
+  steps:
+    -
+      id: run_tests
+      run: |
+          docker run --entrypoint=${{ github.action_path }}/entrypoint.sh ${{ github.event.inputs.docker-image }};
+          cat ~/test_results.txt
+      shell: bash
