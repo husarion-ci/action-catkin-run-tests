@@ -8,8 +8,6 @@ inputs:
   workspace-path:
     description: Path to ros workspace (inside docker)
     required: true
-  setup-bash-path:
-    description: Path to workspace setup.bash file (by default it will source install space)
 
 runs:
   using: composite
@@ -17,9 +15,9 @@ runs:
     -
       id: run_tests
       run: |
-          echo 'docker image: ${{ inputs.docker-image }}';
-          ls;
-          pwd;
-          docker run --entrypoint=${{ github.action_path }}/entrypoint.sh -e SETUP_PATH=${{ inputs.setup-bash-path }} -e WS_PATH=${{ inputs.workspace-path }} ${{ inputs.docker-image }};
-          cat ~/test_results.txt
+          export id=$(docker create ${{ inputs.docker-image }} );
+          docker cp ${{ github.action_path }}/run_tests.sh $id:/;
+          docker commit $id tmp;
+          docker run -e WS_PATH=${{ inputs.workspace-path }} --entrypoint=/run_tests.sh tmp;
+          cat ~/test_results.txt;
       shell: bash
