@@ -1,19 +1,19 @@
 #!/bin/bash
 
 
-if [ -z $1 ]
+if [ -z $WS_PATH ]
 then
       echo "workspace path is empty!"
       exit(1)
 fi
 
-cd $1
+cd $WS_PATH
 
-if [ -z $2 ]
+if [ -z $SETUP_PATH ]
 then
     source install/setup.bash
 else
-    source $2
+    source $SETUP_PATH
 fi
 
 catkin run_tests
