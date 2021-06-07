@@ -17,6 +17,7 @@ runs:
     -
       id: run_tests
       run: |
+          echo 'docker image: ${{ github.event.inputs.docker-image }}'
           docker run --entrypoint=${{ github.action_path }}/entrypoint.sh ${{ github.event.inputs.docker-image }};
           cat ~/test_results.txt
       shell: bash
