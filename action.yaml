@@ -18,8 +18,8 @@ runs:
       id: run_tests
       run: |
           echo 'docker image: ${{ inputs.docker-image }}';
-          echo ls;
-          echo pwd;
+          ls;
+          pwd;
           docker run --entrypoint=${{ github.action_path }}/entrypoint.sh -e SETUP_PATH=${{ inputs.setup-bash-path }} -e WS_PATH=${{ inputs.workspace-path }} ${{ inputs.docker-image }};
           cat ~/test_results.txt
       shell: bash
