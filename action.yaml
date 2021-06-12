@@ -8,6 +8,9 @@ inputs:
   workspace-path:
     description: Path to ros workspace (inside docker)
     required: true
+  outputs_path:
+    description: JUnit xml results will be placed in this folder  
+    required: true
 
 runs:
   using: composite
@@ -18,6 +21,5 @@ runs:
           export id=$(docker create ${{ inputs.docker-image }} );
           docker cp ${{ github.action_path }}/run_tests.sh $id:/;
           docker commit $id tmp;
-          docker run -e WS_PATH=${{ inputs.workspace-path }} --entrypoint=/run_tests.sh tmp;
-          cat ~/test_results.txt;
+          docker run -v ${{ inputs.outputs_path }}:/home/mul/outputs_path -e WS_PATH=${{ inputs.workspace-path }} --entrypoint=/run_tests.sh tmp;
       shell: bash

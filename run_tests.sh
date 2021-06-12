@@ -15,7 +15,19 @@ else
     source $SETUP_PATH
 fi
 
+echo 'starting testing'
+
 catkin run_tests
 
+echo 'finished run_tests'
+
 catkin_test_results > ~/test_results.txt
+
+cat ~/test_results.txt
+
+sudo cp `find . -name "rostest*.xml"` ~/outputs_path
+sudo cp `find . -name "gtest*.xml"` ~/outputs_path
+sudo cp `find . -name "rosunit*.xml"` ~/outputs_path
+
+echo 'printed tests results'
 
