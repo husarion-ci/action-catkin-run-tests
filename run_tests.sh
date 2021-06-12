@@ -15,13 +15,7 @@ else
     source $SETUP_PATH
 fi
 
-rm -rf build/ logs/ devel/ install/
-
-catkin_make_isolated
-
-source devel_isolated/setup.bash
-
-catkin_make_isolated --make-args run_tests
+catkin run_tests
 
 catkin_test_results > ~/test_results.txt
 
