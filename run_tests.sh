@@ -17,7 +17,13 @@ fi
 
 echo 'starting testing'
 
-catkin run_tests
+if catkin run_tests; then
+    ;
+else
+    echo `catkin run tests failed` 
+    exit(1)
+fi
+
 
 echo 'finished run_tests'
 
