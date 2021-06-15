@@ -21,7 +21,7 @@ if catkin run_tests; then
     echo `tests finished`
 else
     echo `catkin run tests failed` 
-    exit(1)
+    exit 1
 fi
 
 
