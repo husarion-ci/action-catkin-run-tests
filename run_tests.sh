@@ -18,9 +18,9 @@ fi
 echo 'starting testing'
 
 if catkin run_tests; then
-    echo `tests finished`
+    echo tests finished
 else
-    echo `catkin run tests failed` 
+    echo catkin run tests failed
     exit 1
 fi
 
