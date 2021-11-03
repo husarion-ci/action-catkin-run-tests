@@ -17,7 +17,7 @@ fi
 
 echo 'starting testing'
 
-if catkin run_tests; then
+if catkin run_tests -j1; then
     echo tests finished
 else
     echo catkin run tests failed
